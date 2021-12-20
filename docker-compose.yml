@@ -35,5 +35,7 @@ services:
       - "8080:80"
   nt:
     image: j3ff/nt-server
+    ports:
+      - "1735:1735"
     volumes:
       - ./nt:/data

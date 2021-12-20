@@ -8,9 +8,15 @@ using json = nlohmann::json;
 
 namespace custom {
 struct CustomTargetData : public deadeye::TargetData {
-  cv::Rect bb;
+  cv::RotatedRect rect;
   cv::Point center;
-  CustomTargetData(std::string id, int sn, bool valid, cv::Rect bb);
+  cv::Point2f rect_corners[4];
+  cv::Mat tvec;
+  cv::Mat rvec;
+  std::vector<cv::Point2d> pnp_corners;
+  CustomTargetData(std::string id, int sn, bool valid, cv::RotatedRect rect,
+                   cv::Point center, cv::Mat tvec, cv::Mat rvec,
+                   std::vector<cv::Point2d> pnp_corners);
 
   void DrawMarkers(cv::Mat& preview) const override;
   std::string Dump() const override;
